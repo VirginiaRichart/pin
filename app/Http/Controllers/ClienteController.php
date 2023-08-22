@@ -21,7 +21,7 @@ class ClienteController extends Controller
                 'nombre' => $cliente->nombre,
                 'apellido' => $cliente->apellido,
                 'correo' => $cliente->correo,
-                'telefono' => $cliente->telefono
+                'mensajeCorreo' => $cliente->mensajeCorreo
             ];
         });
 
@@ -50,14 +50,14 @@ class ClienteController extends Controller
             'nombre' => ['required', 'max:255'],
             'apellido' => ['required', 'max:255'],
             'correo' => ['required', 'max:255'],
-            'telefono' => ['max:255']
+            'mensajeCorreo' => ['required','max:255']
         ]);
 
         $cliente = Cliente::create([
             'nombre' => $request['nombre'],
             'apellido' => $request['apellido'],
             'correo' => $request['correo'],
-            'telefono' => $request['telefono']
+            'mensajeCorreo' => $request['mensajeCorreo']
         ]);
 
         //---------------Mail----------------------
@@ -65,6 +65,7 @@ class ClienteController extends Controller
             'nombre' => $request['nombre'],
             'apellido' => $request['apellido'],
             'correo' => $request['correo'],
+            'mensajeCorreo' => $request['mensajeCorreo'],
         ];
 
         Mail::to('virginiarichart@gmail.com')->send(new SendPost($details));
@@ -100,14 +101,14 @@ class ClienteController extends Controller
         $validated = $request->validate([
             'nombre' => ['required','max:255'],
             'apellido' => ['required','max:255'],
-            'telefono' => ['max:255']
+            'mensajeCorreo' => ['required', 'max:255']
         ]);
 
         $cliente = Cliente::findOrFail($id);
 
         $cliente->nombre = $request['nombre'];
         $cliente->apellido = $request['apellido'];
-        $cliente->telefono = $request['telefono'];
+        $cliente->telefono = $request['mensajeCorreo'];
         $cliente->save();
 
         return response()->json([

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('correo')->unique();
-            $table->string('telefono')->nullable();
+            $table->string('mensajeCorreo');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -10,7 +10,7 @@ class Cliente extends Model
     use SoftDeletes;
     protected $table = 'clientes';
     protected $primaryKey = 'id';
-    protected $fillable = ['nombre','apellido','correo','telefono'];
+    protected $fillable = ['nombre','apellido','correo','mensajeCorreo'];
 
     //Relacion a muchos con Mensaje
     public function mensajes()//un cliente muchos mensajes
